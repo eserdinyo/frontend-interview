@@ -1,7 +1,10 @@
 <template>
   <div class="questions">
     <v-container class="my-3">
-      <p class="display-3">VUEJS INTERVIEW QUESTIONS</p>
+      <v-layout row align-center justify-space-between>
+        <p class="display-3 ma-0">VUEJS INTERVIEW QUESTIONS</p>
+        <v-btn depressed color="success">Send A Question</v-btn>
+      </v-layout>
       <v-divider class="mb-5"></v-divider>
 
       <v-layout row justify-space-between>
@@ -74,4 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-btn {
+  border-radius: 3px;
+}
 </style>

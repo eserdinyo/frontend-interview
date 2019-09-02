@@ -6,6 +6,8 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+export const Bus = new Vue();
+
 new Vue({
   router,
   store,

@@ -2,7 +2,9 @@
   <v-card flat>
     <v-layout justify-space-between align-center class="pa-3">
       <v-flex xs12 md6>
-        <div to="/" class="primary--text">{{ question.title }}</div>
+        <v-btn flat to="/foo" class="custom-btn">
+          <div class="primary--text">{{ question.title }}</div>
+        </v-btn>
       </v-flex>
 
       <v-flex xs2 sm4 md2>
@@ -55,5 +57,9 @@ export default {
 
 .v-chip.hard {
   background: #f83e70;
+}
+
+.custom-btn::before {
+  color: transparent;
 }
 </style>
