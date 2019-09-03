@@ -2,7 +2,9 @@
   <v-app>
     <AppHeader />
     <v-content>
-      <router-view></router-view>
+      <transition name="page" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </v-content>
   </v-app>
 </template>
@@ -21,3 +23,38 @@ export default {
   }
 };
 </script>
+
+<style>
+
+.ql-syntax{
+  border:1px solid #23251F;
+  border-radius: 3px;
+  padding: 20px;
+}
+.page-enter-active {
+  animation: slide-in 0.2s ease-out forwards;
+}
+.page-leave-active {
+  animation: slide-out 0.2s ease-out forwards;
+}
+@keyframes slide-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes slide-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+</style>

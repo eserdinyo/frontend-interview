@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat app color="#1F354D">
+    <v-toolbar flat color="#1F354D">
       <v-toolbar-title class="text-uppercase white--text">
         <v-hover v-slot:default="{ hover }">
           <v-btn flat dark to="/" class="custom-btn" active-class>

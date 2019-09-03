@@ -1,8 +1,8 @@
 <template>
-  <v-card flat>
+  <v-card flat :to="`/question-detail/${question.id}`" :class="`border-${diffClass(question.difficulty)}`">
     <v-layout justify-space-between align-center class="pa-3">
       <v-flex xs12 md6>
-        <v-btn flat to="/foo" class="custom-btn">
+        <v-btn flat class="custom-btn">
           <div class="primary--text">{{ question.title }}</div>
         </v-btn>
       </v-flex>
@@ -61,5 +61,22 @@ export default {
 
 .custom-btn::before {
   color: transparent;
+}
+
+.border-easy {
+  border-left: 3px solid  #3cd1c2;
+  border-radius:2px;
+}
+
+.border-medium {
+  border-left:3px solid  #ffaa2c;
+  border-radius:2px;
+
+}
+
+.border-hard {
+  border-radius:2px;
+
+  border-left:3px solid  #f83e70;
 }
 </style>

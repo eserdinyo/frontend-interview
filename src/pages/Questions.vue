@@ -1,54 +1,46 @@
 <template>
   <div class="questions">
     <v-container class="my-3">
-      <v-layout row align-center justify-space-between>
-        <p class="display-3 ma-0">VUEJS INTERVIEW QUESTIONS</p>
-        <v-btn depressed color="success">Send A Question</v-btn>
+      <v-layout row align-center justify-space-between :class="{'column': $vuetify.breakpoint.xs}">
+        <p
+          :class="{'title mb-2': $vuetify.breakpoint.xs}"
+          class="display-3 ma-0"
+        >{{tech.toUpperCase()}} INTERVIEW QUESTIONS</p>
+        <v-btn depressed color="success" to="/add-question">Send A Question</v-btn>
       </v-layout>
       <v-divider class="mb-5"></v-divider>
 
-      <v-layout row justify-space-between>
+      <v-layout v-if="isLoading" row justify-center>
+        <v-progress-circular :size="50" color="success" indeterminate></v-progress-circular>
+      </v-layout>
+      <v-layout v-if="!isLoading" row justify-space-between>
         <p class="grey--text ml-2">Title</p>
         <v-btn small flat color="grey" @click="sort">
           <v-icon small left>sort</v-icon>
           <span class="caption text-lowercase">By Difficulty</span>
         </v-btn>
       </v-layout>
-      <Question v-for="(que,idx) in questions" :question="que" :key="idx" />
+
+      <v-layout v-if="!isLoading" class="d-block">
+        <Question v-for="(que,idx) in questions" :question="que" :key="idx" />
+      </v-layout>
     </v-container>
   </div>
 </template>
 
 <script>
 import Question from "../components/Question";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       sorted: false,
-      questions: [
-        {
-          id: 1,
-          title: "Describe event bubbling",
-          difficulty: 1
-        },
-        {
-          id: 2,
-          title: "What is the difference between == and ===?",
-
-          difficulty: 2
-        },
-        {
-          id: 3,
-          title: "What's the difference between .call and .apply?",
-          difficulty: 3
-        },
-        {
-          id: 4,
-          title: "When would you use document.write()",
-          difficulty: 2
-        }
-      ]
+      isLoading: false,
+      tech: '',
     };
+  },
+  computed: {
+    ...mapState(["questions"])
   },
   components: {
     Question
@@ -70,8 +62,12 @@ export default {
   },
 
   created() {
-    const id = this.$route.params.id;
-    console.log(id);
+    this.tech = this.$route.params.id;
+
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 };
 </script>

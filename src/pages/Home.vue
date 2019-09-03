@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <app-hero />
     <v-container class="my-5">
       <v-layout row wrap>
         <Tech v-for="tech in techs" :key="tech.name" :tech="tech" />
@@ -10,8 +11,9 @@
 
 <script>
 import Tech from "../components/Tech";
+import AppHero from "../components/AppHero";
 export default {
-  components: { Tech },
+  components: { Tech, AppHero },
   data() {
     return {
       techs: [

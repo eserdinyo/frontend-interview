@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home.vue'
+import QuestionDetail from '../pages/QuestionDetail.vue'
+import AddQuesiton from '../pages/AddQuestion.vue';
 
 Vue.use(Router)
 
@@ -12,6 +14,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/question-detail/:id',
+      name: 'question-detail',
+      component: QuestionDetail
+    },
+    {
+      path: '/add-question',
+      name: 'add-question',
+      component: AddQuesiton
     },
     {
       path: '/questions/:id',

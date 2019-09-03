@@ -1,6 +1,6 @@
 <template>
   <v-flex class="mb-5" xs12 sm6 md4 lg3>
-    <v-card flat style="background: none" :to="`/questions${tech.route}`">
+    <v-card flat style="background: none" :to="`/questions/${getRoute(tech.name)}`">
       <v-img v-if="true" height="150px" contain :src="tech.img"></v-img>
 
       <v-card-text
@@ -17,7 +17,12 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
+  methods: {
+    getRoute(route) {
+      return route.toString().toLowerCase().replace('.','');
+    }
+  },
 };
 </script>
 
