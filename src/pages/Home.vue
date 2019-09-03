@@ -19,28 +19,27 @@ export default {
       techs: [
         {
           name: "Vue.JS",
-          img: require("../assets/img/vue.png"),
-          route: "/vuejs"
+          img: require("../assets/img/vue.png")
         },
         {
           name: "React",
-          img: require("../assets/img/react.png"),
-          route: "/vuejs"
+          img: require("../assets/img/react.png")
         },
         {
           name: "JavaScript",
-          img: require("../assets/img/js.png"),
-          route: "/vuejs"
+          img: require("../assets/img/js.png")
         },
         {
           name: "CSS",
-          img: require("../assets/img/css.png"),
-          route: "/vuejs"
+          img: require("../assets/img/css.png")
         },
         {
           name: "HTML",
-          img: require("../assets/img/html.png"),
-          route: "/vuejs"
+          img: require("../assets/img/html.png")
+        },
+        {
+          name: "Angular",
+          img: require("../assets/img/angular.png")
         }
       ]
     };

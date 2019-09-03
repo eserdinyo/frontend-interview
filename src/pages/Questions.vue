@@ -30,7 +30,7 @@
 
 <script>
 import Question from "../components/Question";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -46,6 +46,7 @@ export default {
     Question
   },
   methods: {
+    ...mapActions(['fetchQuestions']),
     sort() {
       if (!this.sorted) {
         this.questions.sort((a, b) =>
@@ -63,11 +64,11 @@ export default {
 
   created() {
     this.tech = this.$route.params.id;
-
     this.isLoading = true;
-    setTimeout(() => {
+
+    this.fetchQuestions(this.tech).then(res => {
       this.isLoading = false;
-    }, 1000);
+    })
   }
 };
 </script>

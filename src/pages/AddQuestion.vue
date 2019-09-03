@@ -37,24 +37,28 @@
             :disabled="isLoading"
             flat
             class="success ml-0 mt-4"
-            @click="addQuestion"
+            @click="sendQuestion"
           >Send Question</v-btn>
         </v-form>
       </v-layout>
+      <v-snackbar v-model="snackbar" top color="success">
+        Your question succesfuly sended for review &#128525;
+        <v-btn color="#555" text @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
     </v-container>
   </div>
 </template>
 
 <script>
 import Question from "../components/Question";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import "highlight.js/styles/solarized-dark.css";
 import { VueEditor, Quill } from "vue2-editor";
-import { setTimeout } from "timers";
 
 export default {
   data() {
     return {
+      snackbar: false,
       titleRule: [v => !!v || "Title is required"],
       techRule: [v => !!v || "Select a technology"],
       diffRule: [v => !!v || "Select a difficulty"],
@@ -62,11 +66,9 @@ export default {
         difficulty: "",
         tech: "",
         title: "",
-        detail: "",
-        id: ""
+        detail: ""
       },
       isLoading: false,
-      content: "",
       editorSettings: {
         modules: {
           syntax: true
@@ -76,19 +78,19 @@ export default {
       techs: [
         {
           text: "React",
-          value: 1
+          value: "react"
         },
         {
-          text: "Vue",
-          value: 2
+          text: "Vue.JS",
+          value: "vuejs"
         },
         {
           text: "Angular",
-          value: 3
+          value: "angular"
         },
         {
           text: "Javascript",
-          value: 4
+          value: "javascript"
         }
       ],
       items: [
@@ -107,28 +109,28 @@ export default {
       ]
     };
   },
-  computed: {
-    ...mapGetters(["questionsLength"])
-  },
   components: {
     VueEditor
   },
   methods: {
-    addQuestion() {
+    ...mapActions(["addQuestion"]),
+    sendQuestion() {
       if (this.$refs.form.validate()) {
         this.isLoading = true;
 
-        setTimeout(() => {
-          this.$store.dispatch("addQuestion", this.question);
+        this.addQuestion(this.question).then(res => {
           this.isLoading = false;
-          this.$router.push("/questions/vue");
-        }, 2000);
+          this.snackbar = true;
+
+          this.question.title = "";
+          this.question.tech = "";
+          this.question.detail = "";
+          this.question.difficulty = "";
+        });
       }
     }
   },
-  created() {
-    this.question.id = this.questionsLength + 1;
-  }
+  created() {}
 };
 </script>
 
