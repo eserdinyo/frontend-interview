@@ -1,6 +1,6 @@
 <template>
   <v-flex class="mb-5" xs12 sm6 md4 lg3>
-    <v-card flat style="background: none" :to="`/questions/${getRoute(tech.name)}`">
+    <v-card class="tech" flat style="background: none" :to="`/questions/${getRoute(tech.name)}`">
       <v-img v-if="true" height="150px" contain :src="tech.img"></v-img>
 
       <v-card-text
@@ -20,11 +20,24 @@ export default {
   },
   methods: {
     getRoute(route) {
-      return route.toString().toLowerCase().replace('.','');
+      return route
+        .toString()
+        .toLowerCase()
+        .replace(".", "");
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.tech {
+  transition: all .2s;
+  border: 1px solid transparent;
+  padding: 20px;
+}
+.tech:hover {
+  border-radius: 5px;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+}
 </style>
