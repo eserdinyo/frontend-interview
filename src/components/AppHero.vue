@@ -10,14 +10,14 @@ export default {};
 
 <style lang="scss" scoped>
 .hero {
-  height: 50vh;
+  height: 70vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url("../assets/img/hero.jpg");
   background-size: cover;
   text-transform: uppercase;
   color: #ffffff;
   position: relative;
-
+  
   p {
     position: absolute;
     top: 50%;

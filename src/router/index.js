@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home.vue'
-import QuestionDetail from '../pages/QuestionDetail.vue'
-import AddQuesiton from '../pages/AddQuestion.vue';
+import firebase from "firebase";
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -16,19 +15,43 @@ export default new Router({
       component: Home
     },
     {
-      path: '/question-detail/:id',
-      name: 'question-detail',
-      component: QuestionDetail
+      path: '/question/:slug',
+      name: 'question',
+      component: () => import('../pages/QuestionDetail.vue')
     },
     {
       path: '/add-question',
       name: 'add-question',
-      component: AddQuesiton
+      meta: { requiresAuth: true },
+      component: () => import('../pages/AddQuestion.vue')
+
     },
     {
       path: '/questions/:id',
       name: 'questions',
-      component: () => import(/* webpackChunkName: "about" */ '../pages/Questions.vue')
+      component: () => import('../pages/Questions.vue')
     }
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+
+    if (!firebase.auth().currentUser) {
+      next({
+        path: '/',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next();
+  }
+})
+
+
+
+
+export default router;

@@ -1,5 +1,9 @@
 <template>
-  <v-card flat :to="`/question-detail/${question.id}`" :class="`border-${diffClass(question.difficulty)}`">
+  <v-card
+    flat
+    :to="`/question/${question.slug}`"
+    :class="`border-${diffClass(question.difficulty)}`"
+  >
     <v-layout justify-space-between align-center class="pa-3">
       <v-flex xs12 md6>
         <v-btn flat class="custom-btn">
@@ -13,6 +17,11 @@
             small
             :class="`${diffClass(question.difficulty)} white--text my-2 caption`"
           >{{ diffClass(question.difficulty) }}</v-chip>
+
+          <div class="user" small flat color="grey">
+            <v-icon color='grey' small>person</v-icon>
+            <span color='grey' class="caption text-lowercase">eserdinyo</span>
+          </div>
         </div>
       </v-flex>
     </v-layout>
@@ -47,6 +56,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.user {
+  display: flex;
+  position: absolute;
+  right: 1%;
+  color: grey;
+
+  span {
+    margin-left: 2px;
+  }
+}
 .v-chip.easy {
   background: #3cd1c2;
 }
@@ -64,19 +83,18 @@ export default {
 }
 
 .border-easy {
-  border-left: 3px solid  #3cd1c2;
-  border-radius:2px;
+  border-left: 3px solid #3cd1c2;
+  border-radius: 2px;
 }
 
 .border-medium {
-  border-left:3px solid  #ffaa2c;
-  border-radius:2px;
-
+  border-left: 3px solid #ffaa2c;
+  border-radius: 2px;
 }
 
 .border-hard {
-  border-radius:2px;
+  border-radius: 2px;
 
-  border-left:3px solid  #f83e70;
+  border-left: 3px solid #f83e70;
 }
 </style>

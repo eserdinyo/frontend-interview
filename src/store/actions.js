@@ -9,7 +9,8 @@ export default {
         title: question.title,
         tech: question.tech,
         difficulty: question.difficulty,
-        detail: question.detail
+        detail: question.detail,
+        slug: question.slug,
       }).then(res => res.data)
   },
   fetchQuestions({ commit }, param) {
@@ -22,6 +23,17 @@ export default {
 
       commit(constants.FETCH_QUESTIONS, questions)
       return questions;
+    })
+  },
+  fetchSingleQuestion(_, param) {
+    return questionsREF.where("slug", '==', param).get().then(snapshot => {
+      const questions = snapshot.docs.map(res => {
+        const data = res.data();
+        return data;
+      });
+
+      return questions[0];
+
     })
   }
 }

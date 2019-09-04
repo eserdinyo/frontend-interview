@@ -37,7 +37,6 @@
                 Don't have an account yet?
                 <span
                   class="text-bold primary--text font-weight-bold join"
-
                   @click="isLogin=false"
                 >Join the community!</span>
               </p>
@@ -113,13 +112,14 @@ export default {
   watch: {
     dialog() {
       this.$refs.form.reset();
-    }
+    },
+  
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .join {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>

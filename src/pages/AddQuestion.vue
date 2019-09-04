@@ -50,8 +50,9 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import Question from "../components/Question";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import "highlight.js/styles/solarized-dark.css";
 import { VueEditor, Quill } from "vue2-editor";
 
@@ -66,7 +67,8 @@ export default {
         difficulty: "",
         tech: "",
         title: "",
-        detail: ""
+        detail: "",
+        slug: ""
       },
       isLoading: false,
       editorSettings: {
@@ -112,11 +114,25 @@ export default {
   components: {
     VueEditor
   },
+  computed: {
+    ...mapState(["isLoggedIn"])
+  },
   methods: {
     ...mapActions(["addQuestion"]),
+    slugify(text) {
+      return text
+        .toString()
+        .toLowerCase()
+        .replace(/\s+/g, "-") // Replace spaces with -
+        .replace(/[^\w\-]+/g, "") // Remove all non-word chars
+        .replace(/\-\-+/g, "-") // Replace multiple - with single -
+        .replace(/^-+/, "") // Trim - from start of text
+        .replace(/-+$/, ""); // Trim - from end of text
+    },
     sendQuestion() {
       if (this.$refs.form.validate()) {
         this.isLoading = true;
+        this.question.slug = this.slugify(this.question.title);
 
         this.addQuestion(this.question).then(res => {
           this.isLoading = false;
@@ -130,12 +146,22 @@ export default {
       }
     }
   },
-  created() {}
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (!this.isLoggedIn) {
+        this.$router.push("/?signout");
+      }
+    });
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .v-btn {
   border-radius: 3px;
+}
+
+.questions {
+  margin-top: 100px;
 }
 </style>

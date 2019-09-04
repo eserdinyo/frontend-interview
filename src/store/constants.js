@@ -1,2 +1,3 @@
 export const ADD_QUESTION = 'ADD_QEESTION';
 export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
+export const SET_ISLOGGED_IN = 'SET_ISLOGGED_IN';

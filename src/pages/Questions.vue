@@ -77,4 +77,8 @@ export default {
 .v-btn {
   border-radius: 3px;
 }
+
+.questions {
+  margin-top: 100px;
+}
 </style>

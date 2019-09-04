@@ -1,7 +1,10 @@
 <template>
   <div class="questions">
     <v-container class="my-3">
-      <v-layout class="d-block mx-auto" style="max-width: 900px">
+      <v-layout v-if="isLoading" row justify-center>
+        <v-progress-circular :size="50" color="success" indeterminate></v-progress-circular>
+      </v-layout>
+      <v-layout v-else class="d-block mx-auto" style="max-width: 900px">
         <p class="title ma-0 mb-5 text-center">{{question.title}}</p>
 
         <div v-html="question.detail" />
@@ -11,17 +14,17 @@
 </template>
 
 <script>
+
 import Question from "../components/Question";
-
 import { VueEditor, Quill } from "vue2-editor";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import "highlight.js/styles/solarized-dark.css";
-
 
 export default {
   data() {
     return {
       content: "",
+      isLoading: false,
       editorSettings: {
         modules: {
           syntax: {
@@ -35,15 +38,24 @@ export default {
   },
 
   computed: {
-    ...mapState(["questions"])
+  
+  },
+  methods: {
+    ...mapActions(["fetchSingleQuestion"])
   },
   components: {
     VueEditor
   },
 
   created() {
-    const id = this.$route.params.id;
-    this.question = this.questions.find(que => que.id == id);
+    const slug = this.$route.params.slug;
+    this.isLoading = true;
+    this.fetchSingleQuestion(slug).then(res => {
+      this.question = res;
+      this.isLoading = false;
+    });
+
+   
   }
 };
 </script>
@@ -51,5 +63,9 @@ export default {
 <style lang="scss" scoped>
 .v-btn {
   border-radius: 3px;
+}
+
+.questions {
+  margin-top: 100px;
 }
 </style>
