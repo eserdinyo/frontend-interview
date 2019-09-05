@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home.vue'
 import firebase from "firebase";
+import store from '../store';
 
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -29,7 +29,13 @@ const router = new Router({
     {
       path: '/questions/:id',
       name: 'questions',
-      component: () => import('../pages/Questions.vue')
+      component: () => import('../pages/Questions.vue'),
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      meta: { requiresAdmin: true },
+      component: () => import('../pages/Admin.vue'),
     }
   ]
 })
@@ -46,7 +52,20 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-  } else {
+  }
+  else if (to.matched.some(record => record.meta.requiresAdmin)) {
+
+    if (store.state.currentUser.providerData[0].uid !== "26261087") {
+      next({
+        path: '/',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+
+  }
+  else {
     next();
   }
 })

@@ -1,6 +1,5 @@
 import * as constants from './constants';
-import { questionsREF } from "@/firebase";
-import firebase from 'firebase';
+import { questionsREF, usersREF } from "@/firebase";
 
 export default {
   addQuestion(_, question) {
@@ -11,7 +10,29 @@ export default {
         difficulty: question.difficulty,
         detail: question.detail,
         slug: question.slug,
+        username: question.username,
       }).then(res => res.data)
+  },
+  addUser(_, payload) {
+    let users = []
+
+    usersREF.where('uid', '==', payload.uid).get().then(snapshot => {
+      users = snapshot.docs.map(res => {
+        const data = res.data();
+        return data;
+      })
+    }).then(res => {
+
+      if (users.length == 0) {
+        return usersREF.add({
+          uid: payload.uid,
+          email: payload.email,
+          name: payload.name
+        }).then(res => res.data)
+      }
+    })
+
+
   },
   fetchQuestions({ commit }, param) {
     return questionsREF.where("tech", "==", param).get().then(snapshot => {
@@ -22,6 +43,18 @@ export default {
       });
 
       commit(constants.FETCH_QUESTIONS, questions)
+      return questions;
+    })
+  },
+  fetchAllQuestions({commit}) {
+    return questionsREF.get().then(snapshot => {
+      const questions = snapshot.docs.map(res => {
+        const data = res.data();
+        data.id = res.id;
+        return data;
+      });
+
+      commit(constants.FETCH_ALL_QUESTIONS, questions)
       return questions;
     })
   },

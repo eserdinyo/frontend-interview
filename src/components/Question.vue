@@ -19,8 +19,8 @@
           >{{ diffClass(question.difficulty) }}</v-chip>
 
           <div class="user" small flat color="grey">
-            <v-icon color='grey' small>person</v-icon>
-            <span color='grey' class="caption text-lowercase">eserdinyo</span>
+            <v-icon color="grey" small>person</v-icon>
+            <span color="grey" class="caption text-lowercase">{{question.username}}</span>
           </div>
         </div>
       </v-flex>
@@ -64,6 +64,11 @@ export default {
 
   span {
     margin-left: 2px;
+  }
+
+  .v-icon {
+    font-size: 14px !important;
+    margin-right: 2px;
   }
 }
 .v-chip.easy {

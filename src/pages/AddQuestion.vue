@@ -68,7 +68,8 @@ export default {
         tech: "",
         title: "",
         detail: "",
-        slug: ""
+        slug: "",
+        username: '',
       },
       isLoading: false,
       editorSettings: {
@@ -115,7 +116,7 @@ export default {
     VueEditor
   },
   computed: {
-    ...mapState(["isLoggedIn"])
+    ...mapState(["isLoggedIn", 'currentUser'])
   },
   methods: {
     ...mapActions(["addQuestion"]),
@@ -132,7 +133,8 @@ export default {
     sendQuestion() {
       if (this.$refs.form.validate()) {
         this.isLoading = true;
-        this.question.slug = this.slugify(this.question.title);
+        this.question.slug = this.slugify(this.question.title); 
+        this.question.username = this.currentUser.email.split('@')[0];
 
         this.addQuestion(this.question).then(res => {
           this.isLoading = false;

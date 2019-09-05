@@ -7,3 +7,4 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 
 export const questionsREF = firestore.collection('questions')
+export const usersREF = firestore.collection('users')

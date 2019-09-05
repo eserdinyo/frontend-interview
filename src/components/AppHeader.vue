@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat :class="{ nav :  routeName != 'home'}">
+    <v-toolbar flat :class="{ navo :  routeName != 'home'}">
       <v-toolbar-title class="text-uppercase white--text">
         <v-hover v-slot:default="{ hover }">
           <v-btn flat dark to="/" class="custom-btn title" active-class>
@@ -9,8 +9,17 @@
           </v-btn>
         </v-hover>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
       <!-- <v-btn class="ma-2 ba-2" dark outline @click="openModal(true)">Login</v-btn> -->
+      <v-spacer></v-spacer>
+      <div v-if="isLoggedIn">
+        <v-btn
+          v-if="currentUser.providerData[0].uid == '26261087'"
+          class="ma-2 ba-2"
+          dark
+          outline
+          to="/admin"
+        >Admin</v-btn>
+      </div>
       <v-btn v-if="!isLoggedIn" class="ma-2 ba-2" dark outline @click="github">Login With Github</v-btn>
       <v-btn v-else fab small style="border:none" class="ma-2 ba-2" dark outline @click="logout">
         <img style="border-radius: 50%" width="100%" :src="currentUser.photoURL" alt />
@@ -33,20 +42,20 @@
 import Popup from "./Popup";
 import { Bus } from "../main";
 import firebase, { firestore } from "firebase";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      routeName: "",
-      currentUser: ""
+      routeName: ""
     };
   },
   computed: {
-    ...mapState(["isLoggedIn"])
+    ...mapState(["isLoggedIn", "currentUser"])
   },
   methods: {
-    ...mapMutations(["setIsLoggedIn"]),
+    ...mapMutations(["setIsLoggedIn", "setCurrentUser"]),
+    ...mapActions(["addUser"]),
     openModal(isLogin) {
       Bus.$emit("openModal", isLogin);
     },
@@ -60,7 +69,6 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          // ...
         })
         .catch(function(error) {
           // Handle Errors here.
@@ -75,6 +83,13 @@ export default {
     },
     logout() {
       firebase.auth().signOut();
+    },
+    saveUserToDatabase() {
+      this.addUser({
+        uid: this.currentUser.providerData[0].uid,
+        email: this.currentUser.providerData[0].email,
+        name: this.currentUser.providerData[0].displayName
+      });
     }
   },
   components: {
@@ -90,8 +105,11 @@ export default {
 
     firebase.auth().onAuthStateChanged(user => {
       this.setIsLoggedIn(!!user);
-      console.log(firebase.auth().currentUser);
-      this.currentUser = firebase.auth().currentUser;
+      this.setCurrentUser(firebase.auth().currentUser);
+
+      if (this.currentUser) {
+        this.saveUserToDatabase();
+      }
     });
   }
 };
@@ -110,10 +128,9 @@ nav {
   padding: 20px 0;
 }
 
-.nav {
+.navo {
   background-color: #191919 !important;
 }
-
 .custom-btn::before {
   color: transparent;
 }
