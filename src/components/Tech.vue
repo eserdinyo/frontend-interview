@@ -1,5 +1,5 @@
 <template>
-  <v-flex class="mb-5" xs12 sm6 md4 lg3>
+  <v-flex class="mb-5" xs6 sm6 md4 lg3>
     <v-card class="tech" flat style="background: none" :to="`/questions/${getRoute(tech.name)}`">
       <v-img v-if="true" height="150px" contain :src="tech.img"></v-img>
 

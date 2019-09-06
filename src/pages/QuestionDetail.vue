@@ -5,7 +5,7 @@
         <v-progress-circular :size="50" color="success" indeterminate></v-progress-circular>
       </v-layout>
       <v-layout v-else class="d-block mx-auto" style="max-width: 900px">
-        <p class="title ma-0 mb-5 text-center">{{question.title}}</p>
+        <p class="title ma-0 mb-5">{{question.title}}</p>
 
         <div v-html="question.detail" />
       </v-layout>
@@ -14,11 +14,9 @@
 </template>
 
 <script>
-
-import Question from "../components/Question";
 import { VueEditor, Quill } from "vue2-editor";
-import { mapState, mapActions } from "vuex";
-import "highlight.js/styles/solarized-dark.css";
+import { mapActions } from "vuex";
+import "highlight.js/styles/atom-one-dark.css";
 
 export default {
   data() {
@@ -37,9 +35,7 @@ export default {
     };
   },
 
-  computed: {
-  
-  },
+  computed: {},
   methods: {
     ...mapActions(["fetchSingleQuestion"])
   },
@@ -54,8 +50,6 @@ export default {
       this.question = res;
       this.isLoading = false;
     });
-
-   
   }
 };
 </script>
@@ -63,6 +57,10 @@ export default {
 <style lang="scss" scoped>
 .v-btn {
   border-radius: 3px;
+}
+
+.title {
+  margin-top: 30px !important;
 }
 
 .questions {

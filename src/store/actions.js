@@ -11,6 +11,7 @@ export default {
         detail: question.detail,
         slug: question.slug,
         username: question.username,
+        status: false,
       }).then(res => res.data)
   },
   addUser(_, payload) {
@@ -31,11 +32,9 @@ export default {
         }).then(res => res.data)
       }
     })
-
-
   },
   fetchQuestions({ commit }, param) {
-    return questionsREF.where("tech", "==", param).get().then(snapshot => {
+    return questionsREF.where("tech", "==", param).where('status', '==', true).get().then(snapshot => {
       const questions = snapshot.docs.map(res => {
         const data = res.data();
         data.id = res.id;
@@ -46,7 +45,7 @@ export default {
       return questions;
     })
   },
-  fetchAllQuestions({commit}) {
+  fetchAllQuestions({ commit }) {
     return questionsREF.get().then(snapshot => {
       const questions = snapshot.docs.map(res => {
         const data = res.data();
@@ -62,11 +61,30 @@ export default {
     return questionsREF.where("slug", '==', param).get().then(snapshot => {
       const questions = snapshot.docs.map(res => {
         const data = res.data();
+        data.id = res.id;
         return data;
       });
 
       return questions[0];
 
     })
+  },
+
+  // Change Questions Status True or False
+  changeQuestionStatus(_, payload) {
+
+    return questionsREF.doc(payload.id)
+      .update({ status: payload.status }).then(() => {
+        return true;
+      })
+  },
+  editQuestion(_, payload) {
+    return questionsREF.doc(payload.id)
+      .update({
+        title: payload.title,
+        tech: payload.tech,
+        difficulty: payload.difficulty,
+        detail: payload.detail,
+      })
   }
 }

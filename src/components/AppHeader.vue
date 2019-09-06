@@ -20,7 +20,11 @@
           to="/admin"
         >Admin</v-btn>
       </div>
-      <v-btn v-if="!isLoggedIn" class="ma-2 ba-2" dark outline @click="github">Login With Github</v-btn>
+      <!-- <v-btn v-if="false" class="ma-2 ba-2" dark outline @click="github">Login With Github</v-btn> -->
+
+      <div class="logo" v-if="!isLoggedIn" @click="github">
+        <i class="fa fa-github"></i>
+      </div>
       <v-btn v-else fab small style="border:none" class="ma-2 ba-2" dark outline @click="logout">
         <img style="border-radius: 50%" width="100%" :src="currentUser.photoURL" alt />
       </v-btn>
@@ -118,6 +122,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.logo {
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
 nav {
   background: none !important;
   z-index: 1;
@@ -130,6 +139,7 @@ nav {
 
 .navo {
   background-color: #191919 !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5) !important;
 }
 .custom-btn::before {
   color: transparent;

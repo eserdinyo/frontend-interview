@@ -8,6 +8,7 @@ Vue.use(Router)
 
 const router = new Router({
   base: process.env.BASE_URL,
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -35,12 +36,26 @@ const router = new Router({
       path: '/admin',
       name: 'admin',
       meta: { requiresAdmin: true },
-      component: () => import('../pages/Admin.vue'),
+      component: () => import('../pages/Admin/Admin.vue'),
+
+    }, {
+      path: '/admin/question/:slug',
+      name: 'AdminQuestion',
+      meta: { requiresAdmin: true },
+      component: () => import('../pages/Admin/AdminQuestionDetail.vue'),
+    },
+    {
+      path: '/admin/question-edit/:slug',
+      name: 'AdminQuestionEdit',
+      meta: { requiresAdmin: true },
+      component: () => import('../pages/Admin/AdminQuestionEdit.vue'),
     }
   ]
 })
 
 
+
+// Handle Auth
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
 
@@ -55,13 +70,15 @@ router.beforeEach((to, from, next) => {
   }
   else if (to.matched.some(record => record.meta.requiresAdmin)) {
 
-    if (store.state.currentUser.providerData[0].uid !== "26261087") {
-      next({
-        path: '/',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
+    if (store.state.currentUser) {
+      if (store.state.currentUser.providerData[0].uid !== "26261087") {
+        next({
+          path: '/',
+          query: { redirect: to.fullPath }
+        })
+      } else {
+        next()
+      }
     }
 
   }
@@ -69,8 +86,5 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
-
-
-
 
 export default router;

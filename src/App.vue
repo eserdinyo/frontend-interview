@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="app">
     <AppHeader />
     <v-content>
       <transition name="page" mode="out-in">
@@ -25,9 +25,12 @@ export default {
 </script>
 
 <style>
+.application--wrap {
+  /* background-color: #191818; */
+}
 
-.ql-syntax{
-  border:1px solid #23251F;
+.ql-syntax {
+  border: 1px solid #23251f;
   border-radius: 3px;
   padding: 20px;
 }

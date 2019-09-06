@@ -1,5 +1,6 @@
 <template>
   <v-card
+    class="mb-3 py-2"
     flat
     :to="`/question/${question.slug}`"
     :class="`border-${diffClass(question.difficulty)}`"
@@ -25,7 +26,6 @@
         </div>
       </v-flex>
     </v-layout>
-    <v-divider></v-divider>
   </v-card>
 </template>
 
@@ -56,6 +56,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.question {
+  border: 1px solid #555;
+}
+
+.pl0 {
+  padding-left: 0;
+}
 .user {
   display: flex;
   position: absolute;
@@ -88,17 +95,23 @@ export default {
 }
 
 .border-easy {
+  border: 1px solid #ccc;
+
   border-left: 3px solid #3cd1c2;
-  border-radius: 2px;
+
+  border-radius: 5px;
 }
 
 .border-medium {
+  border: 1px solid #ccc;
   border-left: 3px solid #ffaa2c;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .border-hard {
-  border-radius: 2px;
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
 
   border-left: 3px solid #f83e70;
 }

@@ -10,7 +10,7 @@ export default {};
 
 <style lang="scss" scoped>
 .hero {
-  height: 70vh;
+  height: 60vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url("../assets/img/hero.jpg");
   background-size: cover;

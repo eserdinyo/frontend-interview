@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <app-hero />
-    <v-container class="my-5">
+    <v-container class="mt-5 tech">
       <v-layout row wrap>
         <Tech v-for="tech in techs" :key="tech.name" :tech="tech" />
       </v-layout>
@@ -46,3 +46,7 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+
+</style>
