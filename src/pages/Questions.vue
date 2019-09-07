@@ -1,10 +1,10 @@
 <template>
   <div class="questions">
     <v-container class="my-3">
-      <v-layout row align-center justify-space-between :class="{'column': $vuetify.breakpoint.xs}">
+      <v-layout  row align-center justify-space-between :class="{'column': $vuetify.breakpoint.xs}">
         <p
-          :class="{'title mb-2': $vuetify.breakpoint.xs}"
-          class="display-3 ma-0"
+          :class="{'title mb-2 ml-2': $vuetify.breakpoint.xs}"
+          class="display-3"
         >{{tech.toUpperCase()}} INTERVIEW QUESTIONS</p>
         <v-btn depressed color="success" @click="sendQuestion">Send A Question</v-btn>
       </v-layout>

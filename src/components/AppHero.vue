@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <p class="display-3" :class="{'display-1': $vuetify.breakpoint.xs}">get ready for next <br>  <strong class="deep-orange--text text--darken-4">frontend interview</strong> </p>
+    <p class="display-3" :class="{'display-1': $vuetify.breakpoint.xs}">get ready for next <br>  <strong class="deep-orange--text text--darken-1">frontend interview</strong> </p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {};
 
 <style lang="scss" scoped>
 .hero {
-  height: 60vh;
+  height: 68vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url("../assets/img/hero.jpg");
   background-size: cover;

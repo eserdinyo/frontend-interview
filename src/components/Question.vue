@@ -1,5 +1,21 @@
 <template>
-  <v-card
+  <div class="mb-3 py-4 px-4 question" :class="`border-${diffClass(question.difficulty)}`">
+    <router-link
+      :to="`/question/${question.slug}`"
+      class="primary--text question__title"
+    >{{ question.title }}</router-link>
+    <v-chip
+      class="question__chip"
+      small
+      :class="`${diffClass(question.difficulty)} white--text my-2 caption`"
+    >{{ diffClass(question.difficulty) }}</v-chip>
+
+    <div class="user" small flat color="grey">
+      <v-icon color="grey" small>person</v-icon>
+      <span color="grey" class="caption text-lowercase">{{question.username}}</span>
+    </div>
+  </div>
+  <!-- <v-card
     class="mb-3 py-2"
     flat
     :to="`/question/${question.slug}`"
@@ -26,7 +42,7 @@
         </div>
       </v-flex>
     </v-layout>
-  </v-card>
+  </v-card>-->
 </template>
 
 <script>
@@ -58,6 +74,10 @@ export default {
 <style lang="scss" scoped>
 .question {
   border: 1px solid #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
 .pl0 {
@@ -66,7 +86,8 @@ export default {
 .user {
   display: flex;
   position: absolute;
-  right: 1%;
+  right: 20px;
+  bottom: 5%;
   color: grey;
 
   span {

@@ -50,7 +50,10 @@ const router = new Router({
       meta: { requiresAdmin: true },
       component: () => import('../pages/Admin/AdminQuestionEdit.vue'),
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 };
+  },
 })
 
 

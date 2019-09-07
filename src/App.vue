@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style>
+
+::selection {
+  background-color: rgba(244, 218, 18, 0.637);
+}
 .application--wrap {
   /* background-color: #191818; */
 }

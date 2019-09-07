@@ -1,14 +1,10 @@
 <template>
   <nav>
     <v-toolbar flat :class="{ navo :  routeName != 'home'}">
-      <v-toolbar-title class="text-uppercase white--text">
-        <v-hover v-slot:default="{ hover }">
-          <v-btn flat dark to="/" class="custom-btn title" active-class>
-            <span class="font-weight-light">Frontend</span>
-            <span>Interview</span>
-          </v-btn>
-        </v-hover>
-      </v-toolbar-title>
+      <router-link class="logo" to="/">
+        <span class="font-weight-light">Frontend</span>
+        <span>Interview</span>
+      </router-link>
       <!-- <v-btn class="ma-2 ba-2" dark outline @click="openModal(true)">Login</v-btn> -->
       <v-spacer></v-spacer>
       <div v-if="isLoggedIn">
@@ -124,8 +120,13 @@ export default {
 <style lang="scss" scoped>
 .logo {
   color: #fff;
-  font-size: 30px;
+  font-size: 20px;
+  text-transform: uppercase;
   cursor: pointer;
+
+  i {
+    font-size: 30px;
+  }
 }
 nav {
   background: none !important;
@@ -139,7 +140,7 @@ nav {
 
 .navo {
   background-color: #191919 !important;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0px 2px 4px rgba(204, 204, 204, 0.548) !important;
 }
 .custom-btn::before {
   color: transparent;

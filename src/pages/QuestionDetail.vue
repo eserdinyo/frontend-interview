@@ -5,7 +5,8 @@
         <v-progress-circular :size="50" color="success" indeterminate></v-progress-circular>
       </v-layout>
       <v-layout v-else class="d-block mx-auto" style="max-width: 900px">
-        <p class="title ma-0 mb-5">{{question.title}}</p>
+        <p class="display-1 ma-0 mb-5">{{question.title}}</p>
+        <v-divider class="mb-5"></v-divider>
 
         <div v-html="question.detail" />
       </v-layout>
