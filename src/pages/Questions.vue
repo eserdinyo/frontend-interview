@@ -43,10 +43,12 @@
 
 <script>
 import Question from "../components/Question";
+import QuestionMetaInfo from "../mixins/QuestionsMetaInfo";
 import { mapState, mapActions } from "vuex";
 import { enable as enableDarkMode } from "darkreader";
 
 export default {
+  mixins: [QuestionMetaInfo],
   data() {
     return {
       snackbar: false,
@@ -80,7 +82,7 @@ export default {
         );
         this.sorted = false;
       }
-    }
+    },
   },
 
   created() {

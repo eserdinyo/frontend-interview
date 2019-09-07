@@ -58,6 +58,11 @@ import { VueEditor, Quill } from "vue2-editor";
 import { enable as enableDarkMode } from "darkreader";
 
 export default {
+  metaInfo() {
+    return {
+      title: "Add Question | FrontendInterview"
+    };
+  },
   data() {
     return {
       snackbar: false,

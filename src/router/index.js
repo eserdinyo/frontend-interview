@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../pages/Home.vue'
+import Meta from 'vue-meta';
 import firebase from "firebase";
 import store from '../store';
 
 Vue.use(Router)
+Vue.use(Meta)
 
 const router = new Router({
   base: process.env.BASE_URL,

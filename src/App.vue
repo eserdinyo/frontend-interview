@@ -13,6 +13,18 @@
 import AppHeader from "./components/AppHeader";
 export default {
   name: "App",
+  metaInfo: {
+    meta: [
+      {
+        name: "description",
+        content: "Get ready for next frontend interview." // eslint-disable-line
+      },
+      {
+        name: "keywords",
+        content: "frontend, interview, question, react, angular, vue"
+      }
+    ]
+  },
   components: {
     AppHeader
   },
@@ -25,7 +37,6 @@ export default {
 </script>
 
 <style>
-
 ::selection {
   background-color: rgba(244, 218, 18, 0.637);
 }

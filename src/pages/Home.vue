@@ -15,6 +15,11 @@ import AppHero from "../components/AppHero";
 import { enable as enableDarkMode } from "darkreader";
 export default {
   components: { Tech, AppHero },
+  metaInfo() {
+    return {
+      title: "Frontend Interview"
+    };
+  },
   data() {
     return {
       techs: [

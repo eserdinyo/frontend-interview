@@ -19,8 +19,10 @@ import { VueEditor, Quill } from "vue2-editor";
 import { mapActions } from "vuex";
 import "highlight.js/styles/atom-one-dark.css";
 import { enable as enableDarkMode } from "darkreader";
+import QuestionDetailMetaInfo from "../mixins/QuestionDetailMetaInfo";
 
 export default {
+  mixins: [QuestionDetailMetaInfo],
   data() {
     return {
       content: "",
@@ -49,8 +51,8 @@ export default {
     const slug = this.$route.params.slug;
     this.isLoading = true;
     this.fetchSingleQuestion(slug).then(res => {
-      this.question = res;
       this.isLoading = false;
+      this.question = res;
     });
 
     enableDarkMode({
