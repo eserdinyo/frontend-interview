@@ -1,4 +1,4 @@
-# todo-ninja
+# frontend-interview
 
 ## Project setup
 ```
