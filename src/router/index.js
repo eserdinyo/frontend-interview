@@ -49,7 +49,16 @@ const router = new Router({
       name: 'AdminQuestionEdit',
       meta: { requiresAdmin: true },
       component: () => import('../pages/Admin/AdminQuestionEdit.vue'),
-    }
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: () => import('../pages/NotFound.vue'),
+    },
+    {
+      path: '*',
+      redirect: '/404',
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { x: 0, y: 0 };

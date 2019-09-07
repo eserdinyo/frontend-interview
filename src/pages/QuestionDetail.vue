@@ -18,6 +18,7 @@
 import { VueEditor, Quill } from "vue2-editor";
 import { mapActions } from "vuex";
 import "highlight.js/styles/atom-one-dark.css";
+import { enable as enableDarkMode } from "darkreader";
 
 export default {
   data() {
@@ -50,6 +51,12 @@ export default {
     this.fetchSingleQuestion(slug).then(res => {
       this.question = res;
       this.isLoading = false;
+    });
+
+    enableDarkMode({
+      brightness: 100,
+      contrast: 100,
+      sepia: 10
     });
   }
 };

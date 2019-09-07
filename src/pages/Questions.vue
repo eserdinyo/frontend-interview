@@ -1,7 +1,7 @@
 <template>
   <div class="questions">
     <v-container class="my-3">
-      <v-layout  row align-center justify-space-between :class="{'column': $vuetify.breakpoint.xs}">
+      <v-layout row align-center justify-space-between :class="{'column': $vuetify.breakpoint.xs}">
         <p
           :class="{'title mb-2 ml-2': $vuetify.breakpoint.xs}"
           class="display-3"
@@ -34,12 +34,18 @@
         <v-btn color="#555" text @click="snackbar = false">Close</v-btn>
       </v-snackbar>
     </v-container>
+
+    <div v-if="!isLoading && questions.length != 0" class="more-question">
+      <p>More questions coming soon &#128525;</p>
+    </div>
   </div>
 </template>
 
 <script>
 import Question from "../components/Question";
 import { mapState, mapActions } from "vuex";
+import { enable as enableDarkMode } from "darkreader";
+
 export default {
   data() {
     return {
@@ -84,6 +90,12 @@ export default {
     this.fetchQuestions(this.tech).then(res => {
       this.isLoading = false;
     });
+
+    enableDarkMode({
+      brightness: 100,
+      contrast: 100,
+      sepia: 10
+    });
   }
 };
 </script>
@@ -105,5 +117,9 @@ export default {
 
 .questions {
   margin-top: 100px;
+}
+
+.more-question {
+  text-align: center;
 }
 </style>

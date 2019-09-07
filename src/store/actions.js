@@ -46,7 +46,7 @@ export default {
     })
   },
   fetchAllQuestions({ commit }) {
-    return questionsREF.get().then(snapshot => {
+    return questionsREF.orderBy("tech").get().then(snapshot => {
       const questions = snapshot.docs.map(res => {
         const data = res.data();
         data.id = res.id;

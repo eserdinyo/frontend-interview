@@ -55,6 +55,7 @@ import Question from "../components/Question";
 import { mapActions, mapState } from "vuex";
 import "highlight.js/styles/solarized-dark.css";
 import { VueEditor, Quill } from "vue2-editor";
+import { enable as enableDarkMode } from "darkreader";
 
 export default {
   data() {
@@ -69,7 +70,7 @@ export default {
         title: "",
         detail: "",
         slug: "",
-        username: '',
+        username: ""
       },
       isLoading: false,
       editorSettings: {
@@ -116,7 +117,7 @@ export default {
     VueEditor
   },
   computed: {
-    ...mapState(["isLoggedIn", 'currentUser'])
+    ...mapState(["isLoggedIn", "currentUser"])
   },
   methods: {
     ...mapActions(["addQuestion"]),
@@ -133,8 +134,8 @@ export default {
     sendQuestion() {
       if (this.$refs.form.validate()) {
         this.isLoading = true;
-        this.question.slug = this.slugify(this.question.title); 
-        this.question.username = this.currentUser.email.split('@')[0];
+        this.question.slug = this.slugify(this.question.title);
+        this.question.username = this.currentUser.email.split("@")[0];
 
         this.addQuestion(this.question).then(res => {
           this.isLoading = false;
@@ -153,6 +154,12 @@ export default {
       if (!this.isLoggedIn) {
         this.$router.push("/?signout");
       }
+    });
+
+    enableDarkMode({
+      brightness: 100,
+      contrast: 100,
+      sepia: 10
     });
   }
 };

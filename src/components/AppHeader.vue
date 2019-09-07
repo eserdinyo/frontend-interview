@@ -140,7 +140,7 @@ nav {
 
 .navo {
   background-color: #191919 !important;
-  box-shadow: 0px 2px 4px rgba(204, 204, 204, 0.548) !important;
+  border-bottom: 1px solid rgb(129, 129, 129) !important;
 }
 .custom-btn::before {
   color: transparent;

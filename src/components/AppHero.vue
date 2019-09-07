@@ -11,7 +11,7 @@ export default {};
 <style lang="scss" scoped>
 .hero {
   height: 68vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../assets/img/hero.jpg");
   background-size: cover;
   text-transform: uppercase;

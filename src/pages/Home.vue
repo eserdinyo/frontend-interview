@@ -12,6 +12,7 @@
 <script>
 import Tech from "../components/Tech";
 import AppHero from "../components/AppHero";
+import { enable as enableDarkMode } from "darkreader";
 export default {
   components: { Tech, AppHero },
   data() {
@@ -43,10 +44,15 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    enableDarkMode({
+      brightness: 100,
+      contrast: 100,
+      sepia: 10
+    });
   }
 };
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>
