@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "heroku-postbuild": "yarn build --prod"
+    "start": "yarn serve",
+    "heroku-postbuild": "npm start --prod"
   },
   "dependencies": {
     "darkreader": "^4.7.15",
