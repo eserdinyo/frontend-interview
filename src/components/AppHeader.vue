@@ -9,7 +9,7 @@
       <v-spacer></v-spacer>
       <div v-if="isLoggedIn">
         <v-btn
-          v-if="currentUser.providerData[0].uid == '26261087'"
+          v-if="currentUser.providerData[0].uid == '116408898415136690696'"
           class="ma-2 ba-2"
           dark
           outline
@@ -19,7 +19,7 @@
       <!-- <v-btn v-if="false" class="ma-2 ba-2" dark outline @click="github">Login With Github</v-btn> -->
 
       <div class="logo" v-if="!isLoggedIn" @click="github">
-        <i class="fa fa-github"></i>
+        <i class="fa fa-google"></i>
       </div>
       <v-btn v-else fab small style="border:none" class="ma-2 ba-2" dark outline @click="logout">
         <img style="border-radius: 50%" width="100%" :src="currentUser.photoURL" alt />
@@ -60,7 +60,7 @@ export default {
       Bus.$emit("openModal", isLogin);
     },
     github() {
-      const provider = new firebase.auth.GithubAuthProvider();
+      const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
         .signInWithPopup(provider)

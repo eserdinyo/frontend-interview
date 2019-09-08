@@ -85,7 +85,7 @@ router.beforeEach((to, from, next) => {
   else if (to.matched.some(record => record.meta.requiresAdmin)) {
 
     if (store.state.currentUser) {
-      if (store.state.currentUser.providerData[0].uid !== "26261087") {
+      if (store.state.currentUser.providerData[0].uid !== "116408898415136690696") {
         next({
           path: '/',
           query: { redirect: to.fullPath }
