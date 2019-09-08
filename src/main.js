@@ -11,6 +11,7 @@ import './assets/vendor/font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 
+
 export const Bus = new Vue();
 
 
