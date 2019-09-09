@@ -84,6 +84,13 @@ export default {
         tech: payload.tech,
         difficulty: payload.difficulty,
         detail: payload.detail,
+        username: payload.username
+      })
+  },
+  deleteQuestion(_, id) {
+    return questionsREF.doc(id)
+      .delete().then(res => {
+        return true;
       })
   }
 }

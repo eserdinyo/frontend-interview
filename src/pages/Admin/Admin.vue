@@ -31,6 +31,7 @@
                           <th>Show</th>
                           <th>Edit</th>
                           <th>Status</th>
+                          <th>Delete</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -41,13 +42,16 @@
                           <td>{{que.difficulty}}</td>
                           <td>@{{que.username}}</td>
                           <td>
-                            <router-link :to="{name: 'AdminQuestion', params:{slug: que.slug}, query:{tech: que.tech}}">
+                            <router-link
+                              :to="{name: 'AdminQuestion', params:{slug: que.slug}, query:{tech: que.tech}}"
+                            >
                               <i class="lnr lnr-eye"></i>
                             </router-link>
                           </td>
                           <td>
-      
-                            <router-link :to="{name: 'AdminQuestionEdit', params:{slug: que.slug}, query:{tech: que.tech}}">
+                            <router-link
+                              :to="{name: 'AdminQuestionEdit', params:{slug: que.slug}, query:{tech: que.tech}}"
+                            >
                               <span class="lnr lnr-pencil"></span>
                             </router-link>
                           </td>
@@ -58,6 +62,11 @@
                               @click="changeStatus(false,que.id)"
                             ></div>
                             <div v-else class="passive" @click="changeStatus(true,que.id)"></div>
+                          </td>
+                          <td>
+                            <button @click="removeQuestion(que.id)">
+                              <span class="lnr lnr-trash"></span>
+                            </button>
                           </td>
                         </tr>
                       </tbody>
@@ -81,7 +90,7 @@ import Navbar from "./Navbar";
 export default {
   data() {
     return {
-      isLoading: false
+      isLoading: false,
     };
   },
   computed: {
@@ -91,7 +100,11 @@ export default {
     Navbar
   },
   methods: {
-    ...mapActions(["fetchAllQuestions", "changeQuestionStatus"]),
+    ...mapActions([
+      "fetchAllQuestions",
+      "changeQuestionStatus",
+      "deleteQuestion"
+    ]),
     changeStatus(status, id) {
       this.changeQuestionStatus({
         status,
@@ -101,6 +114,11 @@ export default {
         this.fetchAllQuestions().then(res => {
           this.isLoading = false;
         });
+      });
+    },
+    removeQuestion(id) {
+      this.deleteQuestion(id).then(res => {
+        window.location.reload();
       });
     }
   },

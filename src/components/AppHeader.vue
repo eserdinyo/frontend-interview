@@ -101,6 +101,7 @@ export default {
     }
   },
   created() {
+
     this.routeName = this.$route.name;
 
     firebase.auth().onAuthStateChanged(user => {

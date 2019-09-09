@@ -100,6 +100,10 @@ export default {
         {
           text: "Javascript",
           value: "javascript"
+        },
+        {
+          text: "Git",
+          value: "git"
         }
       ],
       items: [
@@ -140,7 +144,9 @@ export default {
       if (this.$refs.form.validate()) {
         this.isLoading = true;
         this.question.slug = this.slugify(this.question.title);
-        this.question.username = this.currentUser.email.split("@")[0];
+        if (this.currentUser.providerData[0].uid == "26261087")
+          this.question.username = "admin";
+        else this.question.username = this.currentUser.email.split("@")[0];
 
         this.addQuestion(this.question).then(res => {
           this.isLoading = false;

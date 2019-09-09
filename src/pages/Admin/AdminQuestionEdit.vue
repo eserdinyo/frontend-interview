@@ -7,6 +7,7 @@
         <v-form ref="form">
           <v-text-field v-model="question.title" label="Title of question" required></v-text-field>
           <v-select v-model="question.tech" :items="techs" required label="Select a technology"></v-select>
+          <v-text-field v-model="question.username" label="Username of question" required></v-text-field>
           <v-select
             class="mb-2"
             required
@@ -74,6 +75,9 @@ export default {
         {
           text: "Javascript",
           value: "javascript"
+        },{
+          text:'Git',
+          value: 'git',
         }
       ],
       items: [
@@ -99,14 +103,15 @@ export default {
   methods: {
     ...mapActions(["fetchSingleQuestion", "editQuestion"]),
     saveQuestion() {
-      const { title, tech, difficulty, detail, id } = this.question;
+      const { title, tech, difficulty, detail, id, username } = this.question;
       this.isLoading = true;
       this.editQuestion({
         title,
         tech,
         difficulty,
         detail,
-        id
+        id,
+        username
       }).then(res => {
         this.isLoading = false;
         this.snackbar = true;

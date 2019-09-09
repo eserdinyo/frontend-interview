@@ -46,6 +46,10 @@ export default {
         {
           name: "Angular",
           img: require("../assets/img/angular.png")
+        },
+        {
+          name: "Git",
+          img: require("../assets/img/git.png")
         }
       ]
     };
