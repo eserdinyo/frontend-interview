@@ -49,8 +49,10 @@ export default {
 
   created() {
     const slug = this.$route.params.slug;
+    const tech = this.$route.query.tech;
+
     this.isLoading = true;
-    this.fetchSingleQuestion(slug).then(res => {
+    this.fetchSingleQuestion({ slug, tech }).then(res => {
       this.isLoading = false;
       this.question = res;
     });

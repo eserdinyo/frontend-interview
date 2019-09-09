@@ -57,8 +57,8 @@ export default {
       return questions;
     })
   },
-  fetchSingleQuestion(_, param) {
-    return questionsREF.where("slug", '==', param).get().then(snapshot => {
+  fetchSingleQuestion(_, params) {
+    return questionsREF.where("slug", '==', params.slug).where("tech", '==', params.tech).get().then(snapshot => {
       const questions = snapshot.docs.map(res => {
         const data = res.data();
         data.id = res.id;
@@ -66,7 +66,6 @@ export default {
       });
 
       return questions[0];
-
     })
   },
 

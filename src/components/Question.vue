@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3 py-4 px-4 question" :class="`border-${diffClass(question.difficulty)}`">
     <router-link
-      :to="`/question/${question.slug}`"
+      :to="{name: 'question', params:{slug: question.slug}, query:{tech: question.tech}}"
       class="primary--text question__title"
     >{{ question.title }}</router-link>
     <v-chip
