@@ -12,7 +12,19 @@ export default {
 				{
 					name: "keywords",
 					content: `frontend, interview, question, ${this.question.tech}`
-				}
+				},
+				{
+					name: 'og:image',
+					content: '../assets/logo.png',
+				},
+				{
+					name: 'og:title',
+					content: this.question.title,
+				},
+				{
+					name: 'twitter:description',
+					content: this.question.title,
+				},
 			]
 		}
 	},
