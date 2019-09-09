@@ -41,12 +41,13 @@
                           <td>{{que.difficulty}}</td>
                           <td>@{{que.username}}</td>
                           <td>
-                            <router-link :to="`/admin/question/${que.slug}`">
+                            <router-link :to="{name: 'AdminQuestion', params:{slug: que.slug}, query:{tech: que.tech}}">
                               <i class="lnr lnr-eye"></i>
                             </router-link>
                           </td>
                           <td>
-                            <router-link :to="`/admin/question-edit/${que.slug}`">
+      
+                            <router-link :to="{name: 'AdminQuestionEdit', params:{slug: que.slug}, query:{tech: que.tech}}">
                               <span class="lnr lnr-pencil"></span>
                             </router-link>
                           </td>

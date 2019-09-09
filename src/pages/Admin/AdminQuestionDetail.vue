@@ -39,7 +39,7 @@ import Navbar from "./Navbar";
 export default {
   data() {
     return {
-    //   question: {},
+      //   question: {},
       isLoading: false
     };
   },
@@ -51,8 +51,9 @@ export default {
   },
   created() {
     const slug = this.$route.params.slug;
+    const tech = this.$route.query.tech;
     this.isLoading = true;
-    this.fetchSingleQuestion(slug).then(res => {
+    this.fetchSingleQuestion({ slug, tech }).then(res => {
       this.question = res;
       this.isLoading = false;
     });
